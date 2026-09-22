@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Ohio Rape Statute of Limitations Timeline</title>
+  <meta name="description" content="An interactive historical visualization of the criminal statute of limitations for rape in Ohio under the assumptions stated on the page.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">Ohio criminal statute of limitations</p>
+      <h1>Applicability of the Criminal Statute of Limitations on Rape in Ohio</h1>
+      <p class="lede">
+        Select the date an offense was committed to see the limitations period modeled under the historical rules summarized below. The visualization assumes an adult victim and excludes tolling and other exceptions.
+      </p>
+    </header>
+
+    <section class="control-panel" aria-labelledby="controls-heading">
+      <div>
+        <h2 id="controls-heading">Choose an offense date</h2>
+        <p class="control-help">Dates begin on August 1, 1989. The latest selectable date is today.</p>
+      </div>
+      <div class="date-control">
+        <label for="offense-date">Date offense was committed</label>
+        <input id="offense-date" name="offense-date" type="date" min="1989-08-01" value="1989-08-01">
+        <p id="date-error" class="error-message" role="alert" hidden></p>
+      </div>
+      <div class="preset-group" aria-label="Important dates">
+        <button type="button" class="preset-button" data-date="1989-08-01">8/1/1989 offense</button>
+        <button type="button" class="preset-button" data-date="1993-03-09">Earliest H.B. 49 case</button>
+        <button type="button" class="preset-button" data-date="1995-07-16">Earliest H.B. 6 / DNA case</button>
+        <button type="button" class="preset-button" data-date="2015-07-16">H.B. 6 effective date</button>
+      </div>
+    </section>
+
+    <section class="result-panel" aria-labelledby="result-heading" aria-live="polite">
+      <div class="result-heading-row">
+        <div>
+          <p class="section-kicker">Selected-offense analysis</p>
+          <h2 id="result-heading">Modeled prosecution window</h2>
+        </div>
+        <span id="application-badge" class="application-badge"></span>
+      </div>
+
+      <div class="summary-grid">
+        <article class="summary-card">
+          <span class="summary-label">Offense date</span>
+          <strong id="selected-date-display">August 1, 1989</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Applicable base period</span>
+          <strong id="applicable-law">6 years</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Modeled base deadline</span>
+          <strong id="base-deadline">August 1, 1995</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">DNA provision</span>
+          <strong id="dna-display">Not applicable under this model</strong>
+        </article>
+      </div>
+      <p id="analysis-explanation" class="analysis-explanation"></p>
+    </section>
+
+    <section class="visualization-section" aria-labelledby="baseline-heading">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Historical baseline</p>
+          <h2 id="baseline-heading">Three statutory periods and their application ranges</h2>
+        </div>
+      </div>
+
+      <div class="legend" aria-label="Timeline legend">
+        <span><i class="legend-swatch retroactivity" aria-hidden="true"></i>Retroactivity / earlier eligible offense dates</span>
+        <span><i class="legend-swatch statute" aria-hidden="true"></i>Statute of limitations</span>
+        <span><i class="legend-swatch dna" aria-hidden="true"></i>DNA provision</span>
+        <span><i class="legend-marker" aria-hidden="true"></i>Selected offense date</span>
+      </div>
+
+      <div id="baseline-chart" class="chart-card" role="img" aria-label="Historical Gantt-style timeline from 1989 through 2050"></div>
+      <p id="baseline-note" class="chart-note"></p>
+      <p class="chart-note">
+        Yellow identifies earlier offense dates eligible for a later amendment because the former limitations period had not yet expired. It is not a separate prosecution period. Under this no-tolling model, the DNA provisions added in 2015 are treated as applicable to qualifying offenses committed on or after July 16, 1995.
+      </p>
+    </section>
+
+    <section class="visualization-section" aria-labelledby="selected-window-heading">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Selected date</p>
+          <h2 id="selected-window-heading">Calculated timeline for the selected offense</h2>
+        </div>
+      </div>
+      <div id="selected-chart" class="chart-card selected-chart-card" role="img" aria-label="Calculated limitations period for the selected offense date"></div>
+      <p id="dna-scenario-note" class="dna-callout" hidden></p>
+    </section>
+
+    <section class="data-section" aria-labelledby="data-heading">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Source data</p>
+          <h2 id="data-heading">Baseline dates used in the visualization</h2>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="baseline-table">
+          <caption class="sr-only">Dates and durations used to construct the historical baseline timeline</caption>
+          <thead>
+            <tr>
+              <th scope="col">Bar</th>
+              <th scope="col">Retroactivity range</th>
+              <th scope="col">Statute-of-limitations segment</th>
+              <th scope="col">DNA segment</th>
+              <th scope="col">Interpretive note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-regime="dana">
+              <th scope="row">Dana Beatty</th>
+              <td>—</td>
+              <td><span class="table-chip statute">8/1/1989–8/1/1995 · 6 years</span></td>
+              <td>—</td>
+              <td>Six-year period for the 8/1/1989 offense. Under the stated assumptions, it expired before H.B. 49 took effect.</td>
+            </tr>
+            <tr data-regime="hb49">
+              <th scope="row">1997 Ohio H.B. 49</th>
+              <td><span class="table-chip retroactivity">3/9/1993–3/9/1999</span></td>
+              <td><span class="table-chip statute">3/9/1999–3/9/2019 · 20 years</span></td>
+              <td>—</td>
+              <td>Applied to earlier offenses that were not already barred under the former six-year period.</td>
+            </tr>
+            <tr data-regime="hb6">
+              <th scope="row">2015 Ohio H.B. 6</th>
+              <td><span class="table-chip retroactivity">7/16/1995–7/16/2015</span></td>
+              <td><span class="table-chip statute">7/16/2015–7/16/2040 · 25 years</span></td>
+              <td><span class="table-chip dna">7/16/2040–7/16/2045 · illustrative 5 years</span></td>
+              <td>The 2015 amendments, including the DNA provisions, apply under this model to qualifying offenses committed on or after 7/16/1995. The displayed DNA period assumes a qualifying determination on 7/16/2040.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notes-grid">
+        <article class="notes-card">
+          <h3>Disclaimers and scope</h3>
+          <ul>
+            <li>This is a simplified historical and editorial visualization, not legal advice or a case-specific legal conclusion.</li>
+            <li>It assumes an adult victim, an offense completed on the selected date, and no tolling, delayed accrual, avoidance of prosecution, pending prosecution, corpus-delicti discovery rule, victim-age rule, or other exception.</li>
+            <li>The yellow ranges are offense-date eligibility ranges for later amendments; they are not independent prosecution windows.</li>
+            <li>The DNA provision is conditional, not automatic. Its actual deadline depends on when a qualifying DNA record is determined to match the DNA record of an identifiable person.</li>
+            <li>The interactive five-year DNA segment assumes the qualifying DNA determination occurs on the base 25-year deadline. A different determination date can produce a different result.</li>
+            <li>The visualization intentionally excludes later amendments not included in the project brief. Calendar-year anniversary calculations are used for display.</li>
+          </ul>
+        </article>
+
+        <article class="notes-card">
+          <h3>Sources</h3>
+          <ol class="source-list">
+            <li><a href="https://codes.ohio.gov/ohio-revised-code/section-2901.13" target="_blank" rel="noopener">Ohio Revised Code § 2901.13</a> — current statutory framework, DNA rules, and application language.</li>
+            <li><a href="https://codes.ohio.gov/ohio-revised-code/section-2901.13/7-16-2015" target="_blank" rel="noopener">Historical R.C. § 2901.13 effective July 16, 2015</a> — 25-year period, DNA provisions, and application to earlier unbarred offenses.</li>
+            <li><a href="https://codes.ohio.gov/ohio-revised-code/section-2907.02" target="_blank" rel="noopener">Ohio Revised Code § 2907.02</a> — rape statute referenced by the visualization.</li>
+            <li><a href="https://legislature.ohio.gov/legislation/131/hb6" target="_blank" rel="noopener">Ohio H.B. 6, 131st General Assembly</a> — 2015 legislation extending the period and adding the DNA provisions.</li>
+            <li><a href="https://www.legislature.ohio.gov/files/lsc/statusreport122/122_HB_49_statusreport.pdf" target="_blank" rel="noopener">Ohio Legislative Service Commission status report for H.B. 49</a> — effective date of March 9, 1999.</li>
+            <li><a href="https://www.supremecourt.ohio.gov/ROD/docs/pdf/98/2002/2002-Ohio-7481.pdf" target="_blank" rel="noopener"><em>State v. Cann</em>, 2002-Ohio-7481</a> — discusses H.B. 49’s application to offenses not already barred under the former period.</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p>Historical model based on the dates and assumptions in <em>Ohio_Rape_SOL_Historical_Timeline.xlsx</em>.</p>
+    </footer>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
